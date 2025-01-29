@@ -22,8 +22,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { useCartStore } from "@/stores/cart";
-import type { Product } from "@/types/product";
+import { useCartStore } from "../stores/cart";
+import type { Product } from "../types/product";
 
 const route = useRoute();
 const cartStore = useCartStore();

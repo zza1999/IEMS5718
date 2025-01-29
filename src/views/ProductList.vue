@@ -35,8 +35,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useCartStore } from "@/stores/cart";
-import type { Product, Category } from "@/types/product";
+import { useCartStore } from "../stores/cart";
+import type { Category, Product } from "../types/product";
 
 const selectedCategory = ref<number>(0);
 const cartStore = useCartStore();
