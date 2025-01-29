@@ -1,28 +1,33 @@
 <template>
   <div class="product-detail" v-if="product">
-    <div class="image-container">
-      <img :src="product.image" :alt="product.name" class="main-image" />
-    </div>
-    <div class="info">
-      <h1>{{ product.name }}</h1>
-      <p class="price">¥{{ product.price }}</p>
-      <p class="description">{{ product.description || "暂无商品描述" }}</p>
-      <button class="add-to-cart">加入购物车</button>
-      <router-link to="/">
-        <button class="back-btn">返回列表</button>
-      </router-link>
+    <div class="detail-content">
+      <div class="image-container">
+        <img :src="product.image" :alt="product.name" class="main-image" />
+      </div>
+      <div class="info">
+        <h1>{{ product.name }}</h1>
+        <p class="price">¥{{ product.price }}</p>
+        <p class="description">{{ product.description || "暂无商品描述" }}</p>
+        <button class="add-to-cart" @click="addToCart(product)">
+          加入购物车 ({{ getCartQuantity(product.id) }})
+        </button>
+        <router-link to="/">
+          <button class="back-btn">返回列表</button>
+        </router-link>
+      </div>
     </div>
   </div>
-  <div v-else>商品不存在</div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import type { Product } from "../types/product";
-const route = useRoute();
+import { useCartStore } from "@/stores/cart";
+import type { Product } from "@/types/product";
 
-// 这里应该通过API获取，但按需求使用固定数据
+const route = useRoute();
+const cartStore = useCartStore();
+
 const products: Product[] = [
   {
     id: 1,
@@ -61,24 +66,35 @@ const products: Product[] = [
 const product = computed(() =>
   products.find((p) => p.id === Number(route.params.id))
 );
+
+const addToCart = (product: Product) => cartStore.addToCart(product);
+const getCartQuantity = (productId: number) =>
+  cartStore.items.find((item) => item.product.id === productId)?.quantity || 0;
 </script>
 
 <style scoped>
 .product-detail {
+  padding: 20px;
+}
+
+.detail-content {
   display: flex;
   gap: 40px;
-  padding: 40px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .image-container {
   flex: 1;
+  max-width: 600px;
 }
 
 .main-image {
   width: 100%;
-  max-width: 600px;
   border-radius: 8px;
 }
 
@@ -108,6 +124,11 @@ const product = computed(() =>
   border-radius: 4px;
   cursor: pointer;
   margin-right: 15px;
+  transition: background 0.3s;
+}
+
+.add-to-cart:hover {
+  background: #218838;
 }
 
 .back-btn {
@@ -117,10 +138,7 @@ const product = computed(() =>
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-.add-to-cart:hover {
-  background: #218838;
+  transition: background 0.3s;
 }
 
 .back-btn:hover {

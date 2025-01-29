@@ -20,12 +20,14 @@
         :key="product.id"
         class="product-card"
       >
-        <img :src="product.image" :alt="product.name" class="product-image" />
-        <h3>{{ product.name }}</h3>
-        <p class="price">¥{{ product.price }}</p>
         <router-link :to="`/product/${product.id}`">
-          <button class="detail-btn">查看详情</button>
+          <img :src="product.image" :alt="product.name" class="product-image" />
+          <h3>{{ product.name }}</h3>
         </router-link>
+        <p class="price">¥{{ product.price }}</p>
+        <button class="add-to-cart" @click="addToCart(product)">
+          加入购物车 ({{ getCartQuantity(product.id) }})
+        </button>
       </div>
     </main>
   </div>
@@ -33,9 +35,11 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import type { Product, Category } from "../types/product";
+import { useCartStore } from "@/stores/cart";
+import type { Product, Category } from "@/types/product";
 
-const selectedCategory = ref<number>(0); // 0表示所有分类
+const selectedCategory = ref<number>(0);
+const cartStore = useCartStore();
 
 const categories: Category[] = [
   { id: 1, name: "电子产品" },
@@ -74,15 +78,16 @@ const products: Product[] = [
   },
 ];
 
-const filteredProducts = computed(() => {
-  return selectedCategory.value === 0
+const filteredProducts = computed(() =>
+  selectedCategory.value === 0
     ? products
-    : products.filter((p) => p.category === selectedCategory.value);
-});
+    : products.filter((p) => p.category === selectedCategory.value)
+);
 
-const selectCategory = (categoryId: number) => {
-  selectedCategory.value = categoryId;
-};
+const selectCategory = (id: number) => (selectedCategory.value = id);
+const addToCart = (product: Product) => cartStore.addToCart(product);
+const getCartQuantity = (productId: number) =>
+  cartStore.items.find((item) => item.product.id === productId)?.quantity || 0;
 </script>
 
 <style scoped>
@@ -136,16 +141,17 @@ const selectCategory = (categoryId: number) => {
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
 .price {
   color: #ff4444;
   font-size: 1.2em;
-  font-weight: bold;
+  margin: 10px 0;
 }
 
-.detail-btn {
-  background: #007bff;
+.add-to-cart {
+  background: #28a745;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -154,7 +160,21 @@ const selectCategory = (categoryId: number) => {
   transition: background 0.3s;
 }
 
-.detail-btn:hover {
-  background: #0056b3;
+.add-to-cart:hover {
+  background: #218838;
+}
+
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+  transition: color 0.2s;
+}
+
+.product-card h3:hover {
+  color: #007bff;
 }
 </style>
