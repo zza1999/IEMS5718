@@ -3,6 +3,11 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  base: './'
+  base: "/IEMS5718/",
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
+  plugins: [vue()]
 })

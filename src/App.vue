@@ -1,8 +1,7 @@
 <template>
   <router-view />
-  1111111111
 </template>
-
+<style src="/src/style.css"></style>
 <style>
 * {
   margin: 0;
