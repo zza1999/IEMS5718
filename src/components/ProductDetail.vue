@@ -19,8 +19,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { Product } from "./ProductList.vue";
-
+import type { Product } from "../types/product";
 const route = useRoute();
 
 // 这里应该通过API获取，但按需求使用固定数据

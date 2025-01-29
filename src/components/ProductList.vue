@@ -33,20 +33,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: number;
-  image: string;
-  description?: string;
-}
-
-interface Category {
-  id: number;
-  name: string;
-}
+import type { Product, Category } from "../types/product";
 
 const selectedCategory = ref<number>(0); // 0表示所有分类
 
