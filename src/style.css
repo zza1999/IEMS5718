@@ -1,0 +1,33 @@
+#app {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.breadcrumb {
+    margin-top: 20px;
+    padding: 0 2rem;
+}
+/* .breadcrumb-container {
+    margin-bottom: 20px;
+    padding: 0, 20px;
+} */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa;
+}
