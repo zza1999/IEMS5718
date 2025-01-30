@@ -13,63 +13,31 @@
             </div>
             <div class="info">
                 <h1>{{ product.name }}</h1>
-                <p class="price">¥{{ product.price }}</p>
+                <p class="price">${{ product.price }}</p>
                 <p class="description">
-                    {{ product.description || "暂无商品描述" }}
+                    {{ product.description || "None" }}
                 </p>
                 <button class="add-to-cart" @click="addToCart(product)">
-                    加入购物车 ({{ getCartQuantity(product.id) }})
+                    Add to Cart ({{ getCartQuantity(product.id) }})
                 </button>
             </div>
         </div>
     </div>
 </template>
 
+<!-- js -->
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { useCartStore } from "../stores/cart";
 import type { Product } from "../types/product";
+import { PRODUCTS } from "../constants";
 import Breadcrumb from "../components/Breadcrumb.vue";
 
 const route = useRoute();
 const cartStore = useCartStore();
 
-const products: Product[] = [
-    {
-        id: 1,
-        name: "智能手机",
-        price: 2999,
-        category: 1,
-        image: "https://picsum.photos/200/200?1",
-        description: "最新款旗舰智能手机",
-    },
-    {
-        id: 2,
-        name: "笔记本电脑",
-        price: 8999,
-        category: 1,
-        image: "https://picsum.photos/200/200?2",
-        description: "高性能游戏笔记本",
-    },
-    {
-        id: 3,
-        name: "男士钱包",
-        price: 399,
-        category: 2,
-        image: "https://picsum.photos/200/200?3",
-        description: "真皮男士钱包",
-    },
-    {
-        id: 4,
-        name: "陶瓷餐具",
-        price: 129,
-        category: 3,
-        image: "https://picsum.photos/200/200?4",
-        description: "精美陶瓷餐具套装",
-    },
-];
-
+const products = PRODUCTS;
 const product = computed(() =>
     products.find((p) => p.id === Number(route.params.id))
 );
@@ -80,6 +48,7 @@ const getCartQuantity = (productId: number) =>
     0;
 </script>
 
+<!-- css -->
 <style scoped>
 .product-detail {
     display: flex;

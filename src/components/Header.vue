@@ -1,14 +1,14 @@
 <template>
     <header class="header">
         <div class="logo">
-            <img src="@/assets/logo.png" alt="商城logo" />
+            <img src="@/assets/logo.png" alt="logo" />
         </div>
 
         <div class="cart-icon" @mouseenter="showCart" @mouseleave="hideCart">
             🛒 {{ cartStore.totalItems }}
             <div v-if="cartStore.isCartVisible" class="cart-dropdown">
                 <div v-if="cartStore.items.length === 0" class="empty-cart">
-                    购物车为空
+                    EMPTY
                 </div>
                 <div v-else>
                     <div
@@ -23,12 +23,12 @@
                         <div class="cart-item-info">
                             <h4>{{ item.product.name }}</h4>
                             <p>
-                                ¥{{ item.product.price }} x {{ item.quantity }}
+                                ${{ item.product.price }} x {{ item.quantity }}
                             </p>
                         </div>
                     </div>
                     <div class="cart-total">
-                        总计：¥{{ cartStore.totalPrice }}
+                        Total: ${{ cartStore.totalPrice }}
                     </div>
                 </div>
             </div>

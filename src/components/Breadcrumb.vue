@@ -18,6 +18,7 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import type { Product } from "../types/product";
+import { CATEGORIES } from "../constants";
 
 const props = defineProps<{
     currentProduct?: Product;
@@ -28,7 +29,6 @@ const route = useRoute();
 const items = computed(() => {
     const crumbs = [{ name: "Home", link: "/" }];
 
-    // 处理分类页
     if (route.name === "ProductList" && route.params.categoryId) {
         const category = categories.find(
             (c) => c.id === Number(route.params.categoryId)
@@ -39,7 +39,6 @@ const items = computed(() => {
         });
     }
 
-    // 处理详情页
     if (route.name === "ProductDetail" && props.currentProduct) {
         const category = categories.find(
             (c) => c.id === props.currentProduct?.category
@@ -56,12 +55,7 @@ const items = computed(() => {
     return crumbs;
 });
 
-// 分类数据需要全局访问（与ProductList中的一致）
-const categories = [
-    { id: 1, name: "电子产品" },
-    { id: 2, name: "服饰箱包" },
-    { id: 3, name: "家居生活" },
-];
+const categories = CATEGORIES;
 </script>
 
 <style scoped>

@@ -5,7 +5,7 @@
         </div>
         <div class="main-content">
             <aside class="categories">
-                <h2>商品分类</h2>
+                <h2>Categories</h2>
                 <ul>
                     <li
                         v-for="category in categories"
@@ -32,7 +32,7 @@
                         />
                         <h3>{{ product.name }}</h3>
                     </router-link>
-                    <p class="price">¥{{ product.price }}</p>
+                    <p class="price">${{ product.price }}</p>
                     <button class="add-to-cart" @click="addToCart(product)">
                         Add to Cart ({{ getCartQuantity(product.id) }})
                     </button>
@@ -42,11 +42,13 @@
     </div>
 </template>
 
+<!-- js -->
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useCartStore } from "../stores/cart";
-import type { Category, Product } from "../types/product";
+import type { Product } from "../types/product";
+import { CATEGORIES, PRODUCTS } from "../constants";
 import Breadcrumb from "../components/Breadcrumb.vue";
 
 const route = useRoute();
@@ -56,43 +58,8 @@ const selectedCategory = ref<number>(
 );
 const cartStore = useCartStore();
 
-const categories: Category[] = [
-    { id: 0, name: "ALL" },
-    { id: 1, name: "电子产品" },
-    { id: 2, name: "服饰箱包" },
-    { id: 3, name: "家居生活" },
-];
-
-const products: Product[] = [
-    {
-        id: 1,
-        name: "智能手机",
-        price: 2999,
-        category: 1,
-        image: "https://picsum.photos/200/200?1",
-    },
-    {
-        id: 2,
-        name: "笔记本电脑",
-        price: 8999,
-        category: 1,
-        image: "https://picsum.photos/200/200?2",
-    },
-    {
-        id: 3,
-        name: "男士钱包",
-        price: 399,
-        category: 2,
-        image: "https://picsum.photos/200/200?3",
-    },
-    {
-        id: 4,
-        name: "陶瓷餐具",
-        price: 129,
-        category: 3,
-        image: "https://picsum.photos/200/200?4",
-    },
-];
+const categories = CATEGORIES;
+const products = PRODUCTS;
 
 const filteredProducts = computed(() =>
     selectedCategory.value === 0
@@ -111,6 +78,7 @@ const getCartQuantity = (productId: number) =>
     0;
 </script>
 
+<!-- css -->
 <style scoped>
 .container {
     display: flex;
