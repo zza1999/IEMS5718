@@ -14,6 +14,7 @@
     </nav>
 </template>
 
+<!-- ts -->
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
@@ -58,6 +59,7 @@ const items = computed(() => {
 const categories = CATEGORIES;
 </script>
 
+<!-- css -->
 <style scoped>
 .breadcrumb {
     padding: 2rem 2rem 0;

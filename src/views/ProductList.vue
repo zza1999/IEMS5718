@@ -42,7 +42,7 @@
     </div>
 </template>
 
-<!-- js -->
+<!-- ts -->
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';

@@ -36,6 +36,7 @@
     </header>
 </template>
 
+<!-- ts -->
 <script setup lang="ts">
 import { useCartStore } from '../stores/cart';
 
@@ -45,6 +46,7 @@ const showCart = () => (cartStore.isCartVisible = true);
 const hideCart = () => (cartStore.isCartVisible = false);
 </script>
 
+<!-- css -->
 <style scoped>
 .header {
     position: fixed;
