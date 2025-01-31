@@ -18,7 +18,7 @@
                     {{ product.description || 'None' }}
                 </p>
                 <button class="add-to-cart" @click="addToCart(product)">
-                    Add to Cart ({{ getCartQuantity(product.id) }})
+                    Add to Cart
                 </button>
             </div>
         </div>
@@ -43,9 +43,6 @@ const product = computed(() =>
 );
 
 const addToCart = (product: Product) => cartStore.addToCart(product);
-const getCartQuantity = (productId: number) =>
-    cartStore.items.find((item) => item.product.id === productId)?.quantity ||
-    0;
 </script>
 
 <!-- css -->
@@ -56,7 +53,6 @@ const getCartQuantity = (productId: number) =>
     gap: 20px;
     padding: 20px;
 }
-
 .detail-content {
     display: flex;
     gap: 40px;
@@ -67,34 +63,28 @@ const getCartQuantity = (productId: number) =>
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 .image-container {
     flex: 1;
     max-width: 600px;
 }
-
 .main-image {
     width: 100%;
     border-radius: 8px;
 }
-
 .info {
     flex: 1;
     padding: 20px;
 }
-
 .price {
     color: #ff4444;
     font-size: 2em;
     margin: 20px 0;
 }
-
 .description {
     color: #666;
     line-height: 1.6;
     margin-bottom: 30px;
 }
-
 .add-to-cart {
     background: #28a745;
     color: white;
@@ -106,7 +96,6 @@ const getCartQuantity = (productId: number) =>
     margin-bottom: 20px;
     transition: background 0.3s;
 }
-
 .add-to-cart:hover {
     background: #218838;
 }

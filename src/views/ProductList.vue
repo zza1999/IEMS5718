@@ -34,7 +34,7 @@
                     </router-link>
                     <p class="price">${{ product.price }}</p>
                     <button class="add-to-cart" @click="addToCart(product)">
-                        Add to Cart ({{ getCartQuantity(product.id) }})
+                        Add to Cart
                     </button>
                 </div>
             </main>
@@ -73,9 +73,6 @@ const selectCategory = (id: number) => {
 };
 
 const addToCart = (product: Product) => cartStore.addToCart(product);
-const getCartQuantity = (productId: number) =>
-    cartStore.items.find((item) => item.product.id === productId)?.quantity ||
-    0;
 </script>
 
 <!-- css -->
@@ -100,31 +97,29 @@ const getCartQuantity = (productId: number) =>
     background: #f5f5f5;
     border-radius: 8px;
 }
-
+.categories h2 {
+    margin: 0 0 1rem;
+}
 .categories ul {
     list-style: none;
     padding: 0;
 }
-
 .categories li {
     padding: 10px;
     cursor: pointer;
     transition: background 0.3s;
 }
-
 .categories li:hover,
 .categories li.active {
     background: #e0e0e0;
     border-radius: 4px;
 }
-
 .product-list {
     flex: 1;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
 }
-
 .product-card {
     background: white;
     padding: 15px;
@@ -133,7 +128,6 @@ const getCartQuantity = (productId: number) =>
     text-align: center;
     max-height: 25em;
 }
-
 .product-image {
     width: 15em;
     height: 15em;
@@ -141,13 +135,11 @@ const getCartQuantity = (productId: number) =>
     border-radius: 4px;
     margin-bottom: 10px;
 }
-
 .price {
     color: #ff4444;
     font-size: 1.2em;
     margin: 10px 0;
 }
-
 .add-to-cart {
     background: #28a745;
     color: white;
@@ -157,21 +149,17 @@ const getCartQuantity = (productId: number) =>
     cursor: pointer;
     transition: background 0.3s;
 }
-
 .add-to-cart:hover {
     background: #218838;
 }
-
 .product-card a {
     text-decoration: none;
     color: inherit;
 }
-
 .product-card h3 {
     margin: 10px 0;
     transition: color 0.2s;
 }
-
 .product-card h3:hover {
     color: #007bff;
 }

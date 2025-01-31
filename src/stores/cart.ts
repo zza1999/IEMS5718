@@ -4,7 +4,6 @@ import type { CartItem, Product } from '../types/product';
 export const useCartStore = defineStore('cart', {
     state: () => ({
         items: [] as CartItem[],
-        isCartVisible: false,
     }),
     actions: {
         addToCart(product: Product) {
@@ -19,6 +18,14 @@ export const useCartStore = defineStore('cart', {
             this.items = this.items.filter(
                 (item) => item.product.id !== productId,
             );
+        },
+        updateQuantity(productId: number, quantity: number) {
+            const item = this.items.find(
+                (item) => item.product.id === productId,
+            );
+            if (item) {
+                item.quantity = Math.max(1, quantity);
+            }
         },
     },
     getters: {
