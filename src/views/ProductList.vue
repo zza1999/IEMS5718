@@ -44,17 +44,17 @@
 
 <!-- js -->
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useCartStore } from "../stores/cart";
-import type { Product } from "../types/product";
-import { CATEGORIES, PRODUCTS } from "../constants";
-import Breadcrumb from "../components/Breadcrumb.vue";
+import { ref, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useCartStore } from '../stores/cart';
+import type { Product } from '../types/product';
+import { CATEGORIES, PRODUCTS } from '../constants';
+import Breadcrumb from '../components/Breadcrumb.vue';
 
 const route = useRoute();
 const router = useRouter();
 const selectedCategory = ref<number>(
-    route.params.categoryId ? parseInt(route.params.categoryId as string) : 0
+    route.params.categoryId ? parseInt(route.params.categoryId as string) : 0,
 );
 const cartStore = useCartStore();
 
@@ -64,12 +64,12 @@ const products = PRODUCTS;
 const filteredProducts = computed(() =>
     selectedCategory.value === 0
         ? products
-        : products.filter((p) => p.category === selectedCategory.value)
+        : products.filter((p) => p.category === selectedCategory.value),
 );
 
 const selectCategory = (id: number) => {
     selectedCategory.value = id;
-    router.push(id ? `/category/${id}` : "/");
+    router.push(id ? `/category/${id}` : '/');
 };
 
 const addToCart = (product: Product) => cartStore.addToCart(product);
@@ -131,12 +131,13 @@ const getCartQuantity = (productId: number) =>
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    max-height: 25em;
 }
 
 .product-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+    width: 15em;
+    height: 15em;
+    object-fit: fill;
     border-radius: 4px;
     margin-bottom: 10px;
 }

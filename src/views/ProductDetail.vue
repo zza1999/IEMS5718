@@ -15,7 +15,7 @@
                 <h1>{{ product.name }}</h1>
                 <p class="price">${{ product.price }}</p>
                 <p class="description">
-                    {{ product.description || "None" }}
+                    {{ product.description || 'None' }}
                 </p>
                 <button class="add-to-cart" @click="addToCart(product)">
                     Add to Cart ({{ getCartQuantity(product.id) }})
@@ -27,19 +27,19 @@
 
 <!-- js -->
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { useCartStore } from "../stores/cart";
-import type { Product } from "../types/product";
-import { PRODUCTS } from "../constants";
-import Breadcrumb from "../components/Breadcrumb.vue";
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { useCartStore } from '../stores/cart';
+import type { Product } from '../types/product';
+import { PRODUCTS } from '../constants';
+import Breadcrumb from '../components/Breadcrumb.vue';
 
 const route = useRoute();
 const cartStore = useCartStore();
 
 const products = PRODUCTS;
 const product = computed(() =>
-    products.find((p) => p.id === Number(route.params.id))
+    products.find((p) => p.id === Number(route.params.id)),
 );
 
 const addToCart = (product: Product) => cartStore.addToCart(product);
@@ -99,7 +99,7 @@ const getCartQuantity = (productId: number) =>
     background: #28a745;
     color: white;
     padding: 12px 24px;
-    width: 180px;
+    font-size: 1.2em;
     border: none;
     border-radius: 4px;
     cursor: pointer;

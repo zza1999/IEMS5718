@@ -15,10 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-import type { Product } from "../types/product";
-import { CATEGORIES } from "../constants";
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import type { Product } from '../types/product';
+import { CATEGORIES } from '../constants';
 
 const props = defineProps<{
     currentProduct?: Product;
@@ -27,28 +27,28 @@ const props = defineProps<{
 const route = useRoute();
 
 const items = computed(() => {
-    const crumbs = [{ name: "Home", link: "/" }];
+    const crumbs = [{ name: 'Home', link: '/' }];
 
-    if (route.name === "ProductList" && route.params.categoryId) {
+    if (route.name === 'ProductList' && route.params.categoryId) {
         const category = categories.find(
-            (c) => c.id === Number(route.params.categoryId)
+            (c) => c.id === Number(route.params.categoryId),
         );
         crumbs.push({
-            name: category?.name || "分类",
+            name: category?.name || '分类',
             link: `/category/${route.params.categoryId}`,
         });
     }
 
-    if (route.name === "ProductDetail" && props.currentProduct) {
+    if (route.name === 'ProductDetail' && props.currentProduct) {
         const category = categories.find(
-            (c) => c.id === props.currentProduct?.category
+            (c) => c.id === props.currentProduct?.category,
         );
         crumbs.push(
             {
-                name: category?.name || "分类",
+                name: category?.name || '分类',
                 link: `/category/${category?.id}`,
             },
-            { name: props.currentProduct.name, link: "" }
+            { name: props.currentProduct.name, link: '' },
         );
     }
 
