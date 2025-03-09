@@ -1,4 +1,5 @@
 <template>
+    <Header />
     <div class="product-detail" v-if="product">
         <div class="breadcrumb-container">
             <Breadcrumb :current-product="product" />
@@ -33,6 +34,7 @@ import { useCartStore } from '../stores/cart';
 import type { Product } from '../types/product';
 import { PRODUCTS } from '../constants';
 import Breadcrumb from '../components/Breadcrumb.vue';
+import Header from '../components/Header.vue';
 
 const route = useRoute();
 const cartStore = useCartStore();

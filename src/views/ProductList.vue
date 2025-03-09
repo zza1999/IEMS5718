@@ -1,4 +1,5 @@
 <template>
+    <Header />
     <div class="container">
         <div class="breadcrumb-container">
             <Breadcrumb />
@@ -50,6 +51,7 @@ import { useCartStore } from '../stores/cart';
 import type { Product } from '../types/product';
 import { CATEGORIES, PRODUCTS } from '../constants';
 import Breadcrumb from '../components/Breadcrumb.vue';
+import Header from '../components/Header.vue';
 
 const route = useRoute();
 const router = useRouter();

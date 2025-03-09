@@ -1,3 +1,4 @@
+// 历史使用
 import type { Product, Category } from './types/product';
 
 export const CATEGORIES: Category[] = [
